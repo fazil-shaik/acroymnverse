@@ -4,7 +4,6 @@
 
 A modern web application built with Next.js that allows users to discover trending acronyms, search for meanings, and engage with a community of language enthusiasts.
 
-![AcronymVerse Banner](https://via.placeholder.com/1200x400/6366f1/ffffff?text=AcronymVerse+🚀)
 
 ## ✨ Features
 
@@ -286,7 +285,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [Live Demo](https://acroymnverse.vercel.app) • [Report Bug](https://github.com/fazil-shaik/acroymnverse/issues) • [Request Feature](https://github.com/fazil-shaik/acroymnverse/issues)
 
 </div>
-
-
-
-<img width="1280" height="832" alt="Screenshot 2025-08-01 at 4 46 40 PM" src="https://github.com/user-attachments/assets/f446fdc4-c715-4bac-bf23-b222aa0becba" />
