@@ -152,19 +152,6 @@ Secure user management with:
 - Protected routes
 - User session management
 
-## 🌐 API Endpoints
-
-### **Search API**
-```typescript
-GET /api/search?query={search_term}
-```
-Returns acronym meanings and AI explanations.
-
-### **Acronyms API**
-```typescript
-GET /api/acronyms          # Get trending acronyms
-POST /api/acronyms         # Create new acronym (Coming Soon)
-```
 
 ## 🎨 Design System
 
