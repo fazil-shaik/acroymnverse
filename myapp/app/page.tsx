@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { Moon, Sun, Sparkles, TrendingUp, Heart } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../components/ThemeProvider';
 import { motion } from 'framer-motion';
 
@@ -121,7 +121,7 @@ export default function Home() {
             </h2>
             <p className={`text-center text-base leading-relaxed
               ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-              Stay updated with the hottest acronyms everyone's using right now. No cap! 📈
+              Stay updated with the hottest acronyms everyone&apos;s using right now. No cap! 📈
             </p>
           </motion.div>
           
@@ -141,7 +141,7 @@ export default function Home() {
             </h2>
             <p className={`text-center text-base leading-relaxed
               ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-              Invent new acronyms and share your unique style with the world. Let's get creative! ✨
+              Invent new acronyms and share your unique style with the world. Let&apos;s get creative! ✨
             </p>
           </motion.div>
           
@@ -175,7 +175,7 @@ export default function Home() {
             onClick={handleGetStartedSignedOut}
             className="bg-gradient-to-r from-custom-green via-custom-pink to-custom-dark text-white font-bold py-4 px-10 rounded-full shadow-2xl hover:scale-110 hover:shadow-3xl transition-all duration-300 mb-8 animate-btn-pop text-lg"
           >
-            Get Started - It's Free! 🎉
+            Get Started - It&apos;s Free! 🎉
           </motion.button>
         </SignedOut>
         
