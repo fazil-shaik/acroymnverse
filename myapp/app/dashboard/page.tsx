@@ -1,9 +1,9 @@
 'use client'
-import { useUser } from '@clerk/nextjs'
+import { useUser, SignOutButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Moon, Sun, RefreshCw } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Moon, Sun, RefreshCw, Menu, X, LogOut } from 'lucide-react'
 import { useTheme } from '../../components/ThemeProvider'
 import AcronymSearch from '../../components/AcronymSearch'
 import RateLimitStatus from '../../components/RateLimitStatus'
@@ -48,6 +48,7 @@ export default function Dashboard() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const fetchDashboardData = async () => {
     try {
@@ -129,18 +130,20 @@ export default function Dashboard() {
             : 'bg-white/80 backdrop-blur-lg'
           }`}>
         <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <motion.h1 
-              className={`text-2xl font-bold transition-colors duration-300
+              className={`text-xl md:text-2xl font-bold transition-colors duration-300
                 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
               whileHover={{ scale: 1.05 }}
             >
               AcronymVerse 🚀
             </motion.h1>
-            <nav className="hidden md:flex gap-6">
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex gap-4 xl:gap-6">
               <button 
                 onClick={() => setActiveTab('search')}
-                className={`px-4 py-2 rounded-full font-medium transition-all duration-300 shadow-sm ${
+                className={`px-3 xl:px-4 py-2 rounded-full font-medium transition-all duration-300 shadow-sm text-sm xl:text-base ${
                   activeTab === 'search' 
                     ? theme === 'dark' 
                       ? 'bg-gradient-to-r from-pink-600 to-teal-600 text-white shadow-pink-500/25' 
@@ -154,7 +157,7 @@ export default function Dashboard() {
               </button>
               <button 
                 onClick={() => setActiveTab('overview')}
-                className={`px-4 py-2 rounded-full font-medium transition-all duration-300 shadow-sm ${
+                className={`px-3 xl:px-4 py-2 rounded-full font-medium transition-all duration-300 shadow-sm text-sm xl:text-base ${
                   activeTab === 'overview' 
                     ? theme === 'dark' 
                       ? 'bg-gradient-to-r from-pink-600 to-teal-600 text-white shadow-pink-500/25' 
@@ -168,7 +171,7 @@ export default function Dashboard() {
               </button>
               <button 
                 onClick={() => setActiveTab('trending')}
-                className={`px-4 py-2 rounded-full font-medium transition-all duration-300 shadow-sm ${
+                className={`px-3 xl:px-4 py-2 rounded-full font-medium transition-all duration-300 shadow-sm text-sm xl:text-base ${
                   activeTab === 'trending' 
                     ? theme === 'dark' 
                       ? 'bg-gradient-to-r from-pink-600 to-teal-600 text-white shadow-pink-500/25' 
@@ -181,8 +184,23 @@ export default function Dashboard() {
                 🔥 Trending
               </button>
             </nav>
+
+            {/* Mobile Tab Navigation */}
+            <div className="lg:hidden flex">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={`p-2 rounded-full transition-colors duration-300
+                  ${theme === 'dark' 
+                    ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                    : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                  }`}
+              >
+                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
+          
+          <div className="flex items-center gap-2 md:gap-4">
             <motion.button
               onClick={refreshData}
               disabled={refreshing}
@@ -194,7 +212,7 @@ export default function Dashboard() {
                   : 'bg-gray-200 hover:bg-gray-300 text-blue-600'
                 }`}
             >
-              <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-4 md:w-5 h-4 md:h-5 ${refreshing ? 'animate-spin' : ''}`} />
             </motion.button>
             <motion.button
               onClick={toggleTheme}
@@ -206,23 +224,110 @@ export default function Dashboard() {
                   : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
                 }`}
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme === 'dark' ? <Sun className="w-4 md:w-5 h-4 md:h-5" /> : <Moon className="w-4 md:w-5 h-4 md:h-5" />}
             </motion.button>
-            <span className={`font-medium transition-colors duration-300 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+            <span className={`hidden md:block font-medium transition-colors duration-300 text-sm lg:text-base ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
               Hey, {user?.firstName || 'User'}! ✨
             </span>
-            <Link href="/profile" className={`px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 shadow-lg
+            <Link href="/profile" className={`px-3 md:px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 shadow-lg text-sm md:text-base
               ${theme === 'dark' 
                 ? 'bg-gradient-to-r from-pink-600 to-teal-600 hover:from-pink-700 hover:to-teal-700 text-white' 
                 : 'bg-gradient-to-r from-pink-500 to-teal-500 hover:from-pink-600 hover:to-teal-600 text-white'
               }`}>
-              👤 Profile
+              <span className="hidden md:inline">👤 Profile</span>
+              <span className="md:hidden">👤</span>
             </Link>
+            <SignOutButton>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-3 md:px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 shadow-lg text-sm md:text-base
+                  ${theme === 'dark' 
+                    ? 'bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white' 
+                    : 'bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white'
+                  }`}
+              >
+                <span className="hidden md:inline">🚪 Logout</span>
+                <span className="md:hidden"><LogOut className="w-4 h-4" /></span>
+              </motion.button>
+            </SignOutButton>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className={`lg:hidden border-t transition-colors duration-300
+                ${theme === 'dark' 
+                  ? 'bg-gray-800/95 border-gray-700' 
+                  : 'bg-white/95 border-gray-200'
+                }`}
+            >
+              <div className="max-w-6xl mx-auto p-4">
+                <div className="grid grid-cols-3 gap-2">
+                  <button 
+                    onClick={() => {
+                      setActiveTab('search')
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className={`px-4 py-3 rounded-full font-medium transition-all duration-300 shadow-sm text-sm ${
+                      activeTab === 'search' 
+                        ? theme === 'dark' 
+                          ? 'bg-gradient-to-r from-pink-600 to-teal-600 text-white shadow-pink-500/25' 
+                          : 'bg-gradient-to-r from-pink-500 to-teal-500 text-white shadow-pink-500/25'
+                        : theme === 'dark'
+                          ? 'text-gray-200 hover:text-white hover:bg-gray-700 border border-gray-600'
+                          : 'text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-pink-400 hover:to-teal-400 border border-gray-300'
+                    }`}
+                  >
+                    🔍 Search
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setActiveTab('overview')
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className={`px-4 py-3 rounded-full font-medium transition-all duration-300 shadow-sm text-sm ${
+                      activeTab === 'overview' 
+                        ? theme === 'dark' 
+                          ? 'bg-gradient-to-r from-pink-600 to-teal-600 text-white shadow-pink-500/25' 
+                          : 'bg-gradient-to-r from-pink-500 to-teal-500 text-white shadow-pink-500/25'
+                        : theme === 'dark'
+                          ? 'text-gray-200 hover:text-white hover:bg-gray-700 border border-gray-600'
+                          : 'text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-pink-400 hover:to-teal-400 border border-gray-300'
+                    }`}
+                  >
+                    📊 Overview
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setActiveTab('trending')
+                      setIsMobileMenuOpen(false)
+                    }}
+                    className={`px-4 py-3 rounded-full font-medium transition-all duration-300 shadow-sm text-sm ${
+                      activeTab === 'trending' 
+                        ? theme === 'dark' 
+                          ? 'bg-gradient-to-r from-pink-600 to-teal-600 text-white shadow-pink-500/25' 
+                          : 'bg-gradient-to-r from-pink-500 to-teal-500 text-white shadow-pink-500/25'
+                        : theme === 'dark'
+                          ? 'text-gray-200 hover:text-white hover:bg-gray-700 border border-gray-600'
+                          : 'text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-pink-400 hover:to-teal-400 border border-gray-300'
+                    }`}
+                  >
+                    🔥 Trending
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.header>
 
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="max-w-6xl mx-auto p-4 md:p-6">
         {/* Search Tab */}
         {activeTab === 'search' && (
           <motion.div

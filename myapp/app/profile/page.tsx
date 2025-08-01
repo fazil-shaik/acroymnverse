@@ -174,20 +174,20 @@ export default function Profile() {
     <div className="min-h-screen bg-gradient-to-br from-gray-300 via-green-300 to-teal-300">
       {/* Header */}
       <header className="bg-white bg-opacity-80 shadow-md p-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-2xl font-bold text-green-700 hover:text-green-800 transition">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
+            <Link href="/dashboard" className="text-xl md:text-2xl font-bold text-green-700 hover:text-green-800 transition">
               AcronymVerse 🚀
             </Link>
-            <span className="text-gray-400">/ Profile</span>
+            <span className="text-gray-400 text-sm md:text-base">/ Profile</span>
           </div>
-          <Link href="/dashboard" className="bg-green-400 text-white px-4 py-2 rounded-full hover:bg-green-500 transition">
+          <Link href="/dashboard" className="bg-green-400 text-white px-4 py-2 rounded-full hover:bg-green-500 transition text-sm md:text-base w-full sm:w-auto text-center">
             Back to Dashboard
           </Link>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="max-w-4xl mx-auto p-4 md:p-6">
         {/* Profile Header */}
         <div className="bg-white bg-opacity-80 rounded-xl p-6 shadow-lg mb-6">
           <div className="flex items-center gap-6">
@@ -237,28 +237,28 @@ export default function Profile() {
 
         {/* Profile Navigation */}
         <div className="bg-white bg-opacity-80 rounded-xl p-4 shadow-lg mb-6">
-          <nav className="flex gap-6">
+          <nav className="flex flex-wrap gap-2 md:gap-6">
             <button 
               onClick={() => setActiveTab('overview')}
-              className={`px-4 py-2 rounded-full transition ${activeTab === 'overview' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
+              className={`px-3 md:px-4 py-2 rounded-full transition text-sm md:text-base ${activeTab === 'overview' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
             >
               📊 Overview
             </button>
             <button 
               onClick={() => setActiveTab('achievements')}
-              className={`px-4 py-2 rounded-full transition ${activeTab === 'achievements' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
+              className={`px-3 md:px-4 py-2 rounded-full transition text-sm md:text-base ${activeTab === 'achievements' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
             >
               🏆 Achievements
             </button>
             <button 
               onClick={() => setActiveTab('my-acronyms')}
-              className={`px-4 py-2 rounded-full transition ${activeTab === 'my-acronyms' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
+              className={`px-3 md:px-4 py-2 rounded-full transition text-sm md:text-base ${activeTab === 'my-acronyms' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
             >
               📝 My Acronyms
             </button>
             <button 
               onClick={() => setActiveTab('settings')}
-              className={`px-4 py-2 rounded-full transition ${activeTab === 'settings' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
+              className={`px-3 md:px-4 py-2 rounded-full transition text-sm md:text-base ${activeTab === 'settings' ? 'bg-green-100 text-green-700 font-semibold' : 'text-gray-600 hover:text-green-700'}`}
             >
               ⚙️ Settings
             </button>

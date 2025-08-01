@@ -90,29 +90,29 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
   }
 
   return (
-    <div className={`w-full max-w-4xl mx-auto p-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+    <div className={`w-full max-w-4xl mx-auto p-4 md:p-6 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
       {/* Search Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <div className="text-center mb-6">
+        <div className="text-center mb-4 md:mb-6">
           <motion.h2 
-            className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent"
+            className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5 }}
           >
             ✨ Discover Acronyms ✨
           </motion.h2>
-          <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-base md:text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
             Type any word and we&apos;ll generate the most fire acronyms! 🔥
           </p>
         </div>
 
         <form onSubmit={handleSearch} className="relative">
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -120,7 +120,7 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Enter a word to discover acronyms..."
-                className={`w-full pl-12 pr-4 py-4 rounded-2xl border-2 transition-all duration-300 text-lg
+                className={`w-full pl-12 pr-4 py-3 md:py-4 rounded-2xl border-2 transition-all duration-300 text-base md:text-lg
                   ${theme === 'dark' 
                     ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-purple-500 focus:bg-gray-700' 
                     : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500 focus:border-purple-500 focus:bg-gray-50'
@@ -133,7 +133,7 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
               disabled={loading || !query.trim()}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white rounded-2xl font-bold text-lg
+              className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white rounded-2xl font-bold text-base md:text-lg
                 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 disabled:opacity-50 disabled:cursor-not-allowed
                 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
@@ -187,7 +187,7 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
             className="space-y-4"
           >
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {[1, 2, 3].map((i) => (
                   <motion.div
                     key={i}
@@ -200,14 +200,14 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
             ) : results.length > 0 ? (
               <>
                 <motion.h3 
-                  className={`text-3xl font-bold text-center mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+                  className={`text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                 >
                   🔥 Top 3 Industry Meanings for &quot;<span className="bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">{query.toUpperCase()}</span>&quot;
                 </motion.h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                   {results.map((result, index) => (
                     <motion.div
                       key={index}
@@ -224,7 +224,7 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
                         rotate: Math.random() * 4 - 2,
                         transition: { duration: 0.2 }
                       }}
-                      className={`relative overflow-hidden rounded-2xl p-6 cursor-pointer group
+                      className={`relative overflow-hidden rounded-2xl p-4 md:p-6 cursor-pointer group
                         ${theme === 'dark' 
                           ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700' 
                           : 'bg-gradient-to-br from-white to-gray-50 border border-gray-200'
@@ -249,7 +249,7 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
                         {/* Acronym Header */}
                         <div className="text-center">
                           <motion.div 
-                            className="text-4xl mb-2"
+                            className="text-3xl md:text-4xl mb-2"
                             animate={{ 
                               rotate: [0, 10, -10, 0],
                               scale: [1, 1.1, 1]
@@ -262,14 +262,14 @@ export default function AcronymSearch({ theme }: AcronymSearchProps) {
                           >
                             {result.emoji}
                           </motion.div>
-                          <h4 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                          <h4 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                             {result.acronym}
                           </h4>
                         </div>
 
                         {/* Full Form */}
-                        <div className={`text-center p-3 rounded-xl ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-100'}`}>
-                          <p className="font-semibold text-lg">{result.fullForm}</p>
+                        <div className={`text-center p-2 md:p-3 rounded-xl ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-100'}`}>
+                          <p className="font-semibold text-base md:text-lg">{result.fullForm}</p>
                         </div>
 
                         {/* Industry */}
